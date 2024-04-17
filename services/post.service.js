@@ -27,6 +27,15 @@ class PostService {
             throw error;
         }
     }
+
+    static async getAllPosts() {
+        try {
+            // Fetch all posts from the database
+            return await PostModel.find({});
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = PostService;

@@ -16,3 +16,12 @@ exports.savePost = async (req, res, next) => {
     }
 }
 
+exports.getAllPosts = async (req, res, next) => {
+    try {
+        const allPosts = await PostService.getAllPosts();
+        res.json(allPosts);
+    } catch (error) {
+        console.log(error, 'err---->');
+        next(error);
+    }
+}

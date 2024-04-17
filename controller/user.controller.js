@@ -8,7 +8,8 @@ exports.register = async (req, res, next) => {
         if (duplicate) {
             throw new Error(`UserName ${email}, Already Registered`)
         }
-        const response = await UserServices.registerUser(email, password);
+        userId = 123
+        const response = await UserServices.registerUser(email, password, userId);
 
         res.json({ status: true, success: 'User registered successfully' });
 
@@ -51,4 +52,20 @@ exports.login = async (req, res, next) => {
         console.log(error, 'err---->');
         next(error);
     }
+}
+
+exports.getUserById = async (req, res, next) => {
+    try {
+        console.log("pasijunge2")
+        const userID = req.params.userID; // Extracting user ID from URL parameters
+        const user = await UserServices.getUserById(userID);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        res.json(user);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+
 }
