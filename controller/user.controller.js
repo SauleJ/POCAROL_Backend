@@ -8,7 +8,8 @@ exports.register = async (req, res, next) => {
         if (duplicate) {
             throw new Error(`UserName ${email}, Already Registered`)
         }
-        const response = await UserServices.registerUser(email, password);
+        userId = 123
+        const response = await UserServices.registerUser(email, password, userId);
 
         res.json({ status: true, success: 'User registered successfully' });
 
@@ -55,8 +56,8 @@ exports.login = async (req, res, next) => {
 
 exports.getUserById = async (req, res, next) => {
     try {
-        const userId = req.body.userId;
-        const user = await UserServices.getUserById(userId);
+        const userID = req.body.userID;
+        const user = await UserServices.getUserById(userID);
         if (!user) {
             throw new Error('User not found');
         }

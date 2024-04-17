@@ -5,11 +5,11 @@ const jwt = require("jsonwebtoken");
 
 class UserServices{
  
-    static async registerUser(email,password){
+    static async registerUser(email,password, UserID){
         try{
-                console.log("-----Email --- Password-----",email,password);
+                console.log("-----Email --- Password----- UserID-----",email,password,UserID);
                 
-                const createUser = new UserModel({email,password});
+                const createUser = new UserModel({email,password, UserID});
                 return await createUser.save();
         }catch(err){
             throw err;
@@ -24,6 +24,7 @@ class UserServices{
         }
     }
 
+
     static async checkUser(email){
         try {
             return await UserModel.findOne({email});
@@ -36,14 +37,15 @@ class UserServices{
         return jwt.sign(tokenData, JWTSecret_Key, { expiresIn: JWT_EXPIRE });
     }
 
-    static async getUserById(userId) {
+    static async getUserById(userID) {
         try {
-          const user = await UserModel.findOne({ _id: userId });
-          return user;
+            const user = await UserModel.findOne({userID});
+            return user;
         } catch (error) {
-          throw error;
+            throw error;
         }
-      }
+    }
+    
 }
 
 module.exports = UserServices;
