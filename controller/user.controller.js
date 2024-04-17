@@ -56,7 +56,8 @@ exports.login = async (req, res, next) => {
 
 exports.getUserById = async (req, res, next) => {
     try {
-        const userID = req.body.userID;
+        console.log("pasijunge2")
+        const userID = req.params.userID; // Extracting user ID from URL parameters
         const user = await UserServices.getUserById(userID);
         if (!user) {
             throw new Error('User not found');
@@ -66,4 +67,5 @@ exports.getUserById = async (req, res, next) => {
         console.log(error);
         next(error);
     }
+
 }

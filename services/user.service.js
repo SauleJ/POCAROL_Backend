@@ -39,6 +39,7 @@ class UserServices{
 
     static async getUserById(userID) {
         try {
+            console.log("pasijunge")
             const user = await UserModel.findOne({userID});
             return user;
         } catch (error) {
