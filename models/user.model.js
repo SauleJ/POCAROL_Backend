@@ -14,10 +14,6 @@ const userSchema = new Schema({
         type: String,
         required: [true, "password is required"],
     },
-    UserID: {
-        type: String,
-        required: [true, "user is required"],
-    },
 },{timestamps:true});
 
 
