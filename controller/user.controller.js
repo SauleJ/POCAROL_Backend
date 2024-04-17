@@ -9,7 +9,7 @@ exports.register = async (req, res, next) => {
             throw new Error(`UserName ${email}, Already Registered`)
         }
         userId = 123
-        const response = await UserServices.registerUser(email, password, userId);
+        const response = await UserServices.registerUser(email, password);
 
         res.json({ status: true, success: 'User registered successfully' });
 
@@ -56,7 +56,6 @@ exports.login = async (req, res, next) => {
 
 exports.getUserById = async (req, res, next) => {
     try {
-        console.log("pasijunge2")
         const userID = req.params.userID; // Extracting user ID from URL parameters
         const user = await UserServices.getUserById(userID);
         if (!user) {

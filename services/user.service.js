@@ -5,11 +5,11 @@ const jwt = require("jsonwebtoken");
 
 class UserServices{
  
-    static async registerUser(email,password, UserID){
+    static async registerUser(email,password){
         try{
-                console.log("-----Email --- Password----- UserID-----",email,password,UserID);
+                console.log("-----Email --- Password-----",email,password);
                 
-                const createUser = new UserModel({email,password, UserID});
+                const createUser = new UserModel({email,password});
                 return await createUser.save();
         }catch(err){
             throw err;
@@ -39,8 +39,7 @@ class UserServices{
 
     static async getUserById(userID) {
         try {
-            console.log("pasijunge")
-            const user = await UserModel.findOne({userID});
+            const user = await UserModel.findOne({_id: userID});
             return user;
         } catch (error) {
             throw error;
