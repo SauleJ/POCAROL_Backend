@@ -34,7 +34,6 @@ userSchema.pre("save",async function(){
 });
 
 
-//used while signIn decrypt
 userSchema.methods.comparePassword = async function (candidatePassword) {
     try {
         console.log('----------------no password',this.password);

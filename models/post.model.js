@@ -28,8 +28,8 @@ const postSchema = new Schema({
         required: [false, "Price is required"],
     },
     createdBy: {
-        type: Schema.Types.ObjectId, // Assuming user ID will be stored as ObjectId
-        ref: 'User', // Reference to the User model
+        type: Schema.Types.ObjectId, 
+        ref: 'User',
         required: true,
     }
 },{timestamps:true});

@@ -66,5 +66,20 @@ exports.getUserById = async (req, res, next) => {
         console.log(error);
         next(error);
     }
+}
 
+exports.getUserByToken = async (req, res, next) => {
+    try {
+        const token = req.params.token;
+        const decodedToken = await UserServices.verifyAccessToken(token);
+        const userId = decodedToken._id;
+        const user = await UserServices.getUserById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        res.json(user);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
 }
