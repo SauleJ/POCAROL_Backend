@@ -25,3 +25,12 @@ exports.getAllPosts = async (req, res, next) => {
         next(error);
     }
 }
+exports.getPostsByUserId = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const posts = await PostService.getPostsByUserId(userId);
+        res.status(200).json(posts);
+    } catch (error) {
+        next(error);
+    }
+};

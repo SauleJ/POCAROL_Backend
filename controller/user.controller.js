@@ -71,7 +71,7 @@ exports.getUserById = async (req, res, next) => {
 exports.getUserByToken = async (req, res, next) => {
     try {
         const token = req.params.token;
-        const decodedToken = await UserServices.verifyAccessToken(token);
+        const decodedToken = await UserServices.verifyAccessToken(token, "secret");
         const userId = decodedToken._id;
         const user = await UserServices.getUserById(userId);
         if (!user) {
