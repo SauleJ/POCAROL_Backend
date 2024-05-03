@@ -36,6 +36,17 @@ class PostService {
             throw error;
         }
     }
+
+    static async getPostsByUserId (userId) {
+        try {
+            const posts = await PostModel.find({ createdBy: userId });
+            return posts;
+    } catch (error) {
+        throw new Error('Error fetching posts by user ID');
+    }
+
+    };
+    
 }
 
 module.exports = PostService;

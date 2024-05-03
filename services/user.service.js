@@ -45,6 +45,14 @@ class UserServices{
             throw error;
         }
     }
+
+    static async verifyAccessToken(token, JWTSecret_Key) {
+        try {
+            return jwt.verify(token, JWTSecret_Key);
+        } catch (error) {
+            throw error;
+        }
+    }
     
 }
 
