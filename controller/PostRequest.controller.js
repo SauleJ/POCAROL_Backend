@@ -2,7 +2,6 @@ const PostRequestService = require('../services/PostRequest.service');
 
 exports.savePostRequest = async (req, res, next) => {
     try {
-        console.log("mee controller")
         const postRequest = await PostRequestService.savePostRequest(req.body);
         res.json(postRequest);
     } catch (error) {
@@ -23,6 +22,7 @@ exports.getUsersForPost = async (req, res, next) => {
   try {
     const { postId } = req.params;
     const users = await PostRequestService.getUsersForPost(postId);
+
     return res.json({ users });
   } catch (error) {
     console.error('Error fetching users for post:', error);

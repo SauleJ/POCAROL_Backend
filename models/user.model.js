@@ -14,6 +14,12 @@ const userSchema = new Schema({
         type: String,
         required: [true, "password is required"],
     },
+    username: String,
+    name: String,
+    rating: { type: Number, default: 0 },
+    lastname: String,
+    photo: String,
+    carNumber: String
 },{timestamps:true});
 
 
@@ -36,7 +42,7 @@ userSchema.pre("save",async function(){
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
     try {
-        console.log('----------------no password',this.password);
+        console.log('---',this.password);
         // @ts-ignore
         const isMatch = await bcrypt.compare(candidatePassword, this.password);
         return isMatch;

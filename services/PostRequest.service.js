@@ -42,6 +42,7 @@ exports.getAllPostRequest = async () => {
 exports.getUsersForPost = async (postId) => {
   try {
     const postRequest = await PostRequestModel.findOne({ postID: postId });
+
     if (!postRequest) {
       throw new Error('Post not found');
     }
@@ -64,7 +65,7 @@ exports.updateUserState = async (userID, postID, newState, index) => {
 
         // Save the updated post request
         await postRequest.save();
-        console.log("USERRR updatedd")
+        console.log("User Updated")
         return { message: 'User state updated successfully' };
     } catch (error) {
         console.error('Error updating user state:', error);
@@ -75,19 +76,16 @@ exports.updateUserState = async (userID, postID, newState, index) => {
 exports.getPostsByUserIdWithTrueStateUsers = async (userId) => {
     try {
         const postsWithTrueStateUsers = [];
-
         // Find posts where the user is in the users list and the state is true
         const postRequests = await PostRequestModel.find({
             'users.userID': userId,
             'users.state': true
-        });
-
+        }).elemMatch('users', { 'userID': userId, 'state': true });
         // Extract the postIDs from the found postRequests
         const postIDs = postRequests.map(postRequest => postRequest.postID);
 
         // Find posts related to the postRequests
         const relatedPosts = await PostModel.find({ _id: { $in: postIDs } });
-
         // Push related posts into postsWithTrueStateUsers
         postsWithTrueStateUsers.push(...relatedPosts);
 
@@ -124,7 +122,7 @@ exports.saveChatMessages = async (postId, message, senderId) => {
         if (!sender) {
             throw new Error('Sender not found');
         }
-        let senderUsername = sender.email;
+        let senderUsername = sender.username;
 
         // Append the new chat message to the existing ones
         postRequest.chatMessages.push({ senderID: senderId, senderUsername: senderUsername, message: message });
