@@ -17,3 +17,6 @@ app.use("/",PostRoute);
 app.use("/",PostRequestRoute);
 
 module.exports = app;
+
+
+///to run write node app.js
